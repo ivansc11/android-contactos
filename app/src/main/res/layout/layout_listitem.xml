@@ -12,16 +12,27 @@
         android:id="@+id/contact_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/contact_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/contact_image"
-        android:text="Nombre contacto"
+        android:text="Name"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/contact_surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="119dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/contact_image"
+        android:text="Surname"
         android:textSize="24sp" />
 
     <TextView

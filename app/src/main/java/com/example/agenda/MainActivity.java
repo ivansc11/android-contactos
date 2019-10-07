@@ -3,7 +3,9 @@ package com.example.agenda;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,6 +32,10 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+        Log.d("Creation","Initialize app");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -42,50 +48,14 @@ public class MainActivity extends Activity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-
-
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArray.add("Ivan");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-        testArrayNumbers.add("123456789");
-
-
-
-
-
+        DBManager manager = new DBManager(this);
+        SQLiteDatabase db = manager.getReadableDatabase();
 
         // specify an adapter (see also next example)
-        mAdapter = new RecyclerAdapter(testArray,testArrayNumbers, this);
+        mAdapter = new RecyclerAdapter(manager.getAllContacts());
         recyclerView.setAdapter(mAdapter);
+
+
     }
 }
 
