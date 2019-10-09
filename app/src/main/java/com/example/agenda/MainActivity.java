@@ -7,16 +7,16 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.agenda.R;
+import android.view.View;
+
+
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
     ArrayList<String> testArray = new ArrayList<>();
     ArrayList<String> testArrayNumbers = new ArrayList<>();;
 
+    DBManager manager;
 
 
 
@@ -36,7 +37,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
-        Log.d("Creation","Initialize app");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        DBManager manager = new DBManager(this);
+        manager = new DBManager(this);
         SQLiteDatabase db = manager.getReadableDatabase();
 
         // specify an adapter (see also next example)
@@ -58,10 +58,24 @@ public class MainActivity extends Activity {
         recyclerView.setAdapter(mAdapter);
 
 
+        saveContactToDatabase();
+
     }
+
+
+    public void saveContactToDatabase(){
+        Contact c = (Contact)getIntent().getSerializableExtra("newContact");
+        if(c != null){
+            manager.saveContact(c);
+            Log.d("asd",c.getName());
+        }
+
+    }
+
 
     public void addContact(View view){
         Intent intent = new Intent(this, CreateContactActivity.class);
+
         startActivity(intent);
 
     }

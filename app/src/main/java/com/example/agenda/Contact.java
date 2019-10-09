@@ -2,9 +2,10 @@ package com.example.agenda;
 
 import android.content.ContentValues;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Contact {
+public class Contact implements Serializable {
 
     private String name;
     private String surname;

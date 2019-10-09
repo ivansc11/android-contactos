@@ -9,9 +9,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 
 
-public class DBManager extends SQLiteOpenHelper {
+public class DBManager extends SQLiteOpenHelper implements Serializable {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Contacts.db";
