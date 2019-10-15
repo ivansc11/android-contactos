@@ -4,29 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="80dp"
     android:focusable="true"
     android:clickable="true"
-    android:background="?attr/selectableItemBackground">
+    android:background="@color/container"
+    >
 
-
-
-
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/contact_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="3dp"
         android:src="@drawable/ic_launcher_foreground"
+        android:layout_centerVertical="true"
+        app:civ_border_color="@color/design1"
+        app:civ_border_width="2dp"
         tools:srcCompat="@tools:sample/avatars" />
+
 
     <TextView
         android:id="@+id/contact_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/contact_image"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@id/contact_image"
         android:text="Name"
+        android:textColor="@color/text"
         android:textSize="24sp" />
 
     <TextView
@@ -34,9 +38,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="87dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:layout_toRightOf="@id/contact_image"
         android:text="Surname"
+        android:textColor="@color/text"
         android:textSize="24sp" />
 
     <TextView
@@ -45,24 +50,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/contact_name"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginBottom="12dp"
         android:layout_toRightOf="@id/contact_image"
         android:text="(999)123456789"
+        android:textColor="@color/text"
         android:textSize="17sp" />
 
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
-        android:layout_height="127dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="0dp"
+        android:layout_marginTop="3.5dp"
+        android:backgroundTint="@color/design1"
         android:background="@android:drawable/btn_default"
         android:clickable="true"
         android:focusable="true"
         android:onClick="editContactIntent"
         android:src="@android:drawable/ic_menu_view" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.2dp"
+        android:paddingHorizontal="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background" />
 
 </RelativeLayout>

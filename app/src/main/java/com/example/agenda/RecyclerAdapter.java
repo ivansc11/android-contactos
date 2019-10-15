@@ -54,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         {
             mContacts.add(
                     new Contact(
-                            queryRequest.getInt(queryRequest.getColumnIndex("_ID")),
+
                             queryRequest.getString(queryRequest.getColumnIndex("name")),
                     queryRequest.getString(queryRequest.getColumnIndex("surname")),
                     queryRequest.getString(queryRequest.getColumnIndex("phoneNumber")),
