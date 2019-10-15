@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/parent_layout">
+    android:focusable="true"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground">
+
+
 
 
     <ImageView
@@ -45,6 +49,20 @@
         android:layout_toRightOf="@id/contact_image"
         android:text="(999)123456789"
         android:textSize="17sp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="127dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="0dp"
+        android:background="@android:drawable/btn_default"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="editContactIntent"
+        android:src="@android:drawable/ic_menu_view" />
 
 
 </RelativeLayout>

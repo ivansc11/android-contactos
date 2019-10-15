@@ -96,7 +96,7 @@ tools:context=".CreateContactActivity">
         android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/etPlannedDate"
+        android:id="@+id/etBirthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
@@ -128,7 +128,7 @@ tools:context=".CreateContactActivity">
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/toolbar2"
         android:layout_marginEnd="7dp"
-        android:onClick="saveContact"
+        android:onClick="addContact"
         android:visibility="visible"
         app:srcCompat="@android:drawable/ic_input_add" />
 

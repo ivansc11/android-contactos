@@ -7,6 +7,7 @@ import java.sql.Date;
 
 public class Contact implements Serializable {
 
+    private int id;
     private String name;
     private String surname;
     private String nickname;
@@ -14,17 +15,24 @@ public class Contact implements Serializable {
     private String avatarUrl;
     private String birthday;
 
-    public Contact(String name, String surname, String phoneNumber, String birthday) {
+    public Contact(int id, String name, String surname, String phoneNumber, String birthday) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.birthday = birthday;
     }
 
+    public Contact(String name, String surname, String phoneNumber, String birthday) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.birthday = birthday;
+    }
 
     //GETTERS
-
-
+    public int getID() {return id;}
 
     public String getName() {
         return name;

@@ -1,22 +1,18 @@
 package com.example.agenda;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-
+import android.view.MotionEvent;
 import android.view.View;
 
-
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
@@ -31,7 +27,7 @@ public class MainActivity extends Activity {
 
     DBManager manager;
 
-
+    Context thisContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +44,22 @@ public class MainActivity extends Activity {
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
+
+
         recyclerView.setLayoutManager(layoutManager);
 
         manager = new DBManager(this);
         SQLiteDatabase db = manager.getReadableDatabase();
+
+        // TODO: add checking if an user is actually sended from the save contact activity
+        saveContactToDatabase();
 
         // specify an adapter (see also next example)
         mAdapter = new RecyclerAdapter(manager.getAllContacts());
         recyclerView.setAdapter(mAdapter);
 
 
-        saveContactToDatabase();
+
 
     }
 
@@ -73,11 +74,17 @@ public class MainActivity extends Activity {
     }
 
 
-    public void addContact(View view){
+    public void addContactIntent(View view){
         Intent intent = new Intent(this, CreateContactActivity.class);
 
         startActivity(intent);
 
+    }
+
+    public void editContactIntent(View view){
+        Intent intent = new Intent(this, EditContactActivity.class);
+
+        startActivity(intent);
     }
 }
 

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,24 +47,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void ParseData(Cursor queryRequest){
 
-        Log.d("Creating","Parsing data");
-        Log.d("Creating",String.valueOf(queryRequest.getCount()));
+
         String[] a = queryRequest.getColumnNames();
 
         for(queryRequest.moveToFirst(); !queryRequest.isAfterLast(); queryRequest.moveToNext())
         {
-            mContacts.add(new Contact(queryRequest.getString(queryRequest.getColumnIndex("name")),
+            mContacts.add(
+                    new Contact(
+                            queryRequest.getInt(queryRequest.getColumnIndex("_ID")),
+                            queryRequest.getString(queryRequest.getColumnIndex("name")),
                     queryRequest.getString(queryRequest.getColumnIndex("surname")),
                     queryRequest.getString(queryRequest.getColumnIndex("phoneNumber")),
                     queryRequest.getString(queryRequest.getColumnIndex("birthday"))));
 
         }
 
-
-
-
-
-        Log.d("Creating","Parsing finished");
     }
 
     public RecyclerAdapter(ArrayList<String> mContactNumber, ArrayList<String> mContactName, Context mContext) {
@@ -109,6 +108,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+
+
+
         Log.d("Creating","Binding elements");
         holder.textViewName.setText(mContacts.get(position).getName());
         holder.textViewSurname.setText(mContacts.get(position).getSurname());
@@ -120,4 +122,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public int getItemCount() {
         return mContacts.size();
     }
+
+
+
 }

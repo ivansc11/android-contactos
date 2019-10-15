@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -15,22 +14,22 @@ public class CreateContactActivity extends AppCompatActivity {
     EditText name;
     EditText surname;
     EditText phoneNumber;
-    EditText etPlannedDate;
+    EditText birthday;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_contact);
 
+        
         name = (EditText)findViewById(R.id.etName);
         surname = (EditText)findViewById(R.id.etSurname);
         phoneNumber = (EditText) findViewById(R.id.etPhonenumber);
-
-        etPlannedDate = (EditText) findViewById(R.id.etPlannedDate);
-        etPlannedDate.setOnClickListener(new View.OnClickListener(){
+        birthday = (EditText) findViewById(R.id.etBirthday);
+        birthday.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.etPlannedDate:
+                    case R.id.etBirthday:
                         showDatePickerDialog();
                         break;
                 }
@@ -47,7 +46,7 @@ public class CreateContactActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero
                 final String selectedDate = day + " / " + (month+1) + " / " + year;
-                etPlannedDate.setText(selectedDate);
+                birthday.setText(selectedDate);
             }
         });
 
@@ -56,10 +55,10 @@ public class CreateContactActivity extends AppCompatActivity {
 
 
     //Agregar contacto a la base de datos
-    public void saveContact(View v) {
+    public void addContact(View v) {
 
         Intent intent = new Intent(this, MainActivity.class);
-        Contact c = new Contact(name.getText().toString(),surname.getText().toString(),phoneNumber.getText().toString(), etPlannedDate.getText().toString());
+        Contact c = new Contact(name.getText().toString(),surname.getText().toString(),phoneNumber.getText().toString(), birthday.getText().toString());
 
 
         intent.putExtra("newContact", c);
