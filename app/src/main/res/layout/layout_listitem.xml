@@ -57,17 +57,16 @@
         android:textSize="17sp" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3.5dp"
-        android:backgroundTint="@color/design1"
         android:background="@android:drawable/btn_default"
+        android:backgroundTint="@color/design1"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="editContactIntent"
         android:src="@android:drawable/ic_menu_view" />
 
     <View

@@ -27,7 +27,6 @@ public class MainActivity extends Activity {
 
     DBManager manager;
 
-    Context thisContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -51,8 +49,12 @@ public class MainActivity extends Activity {
         manager = new DBManager(this);
         SQLiteDatabase db = manager.getReadableDatabase();
 
-        // TODO: add checking if an user is actually sended from the save contact activity
-        saveContactToDatabase();
+        //Checks if contact has been sended from create contact activity and saves it to the database
+        Contact c = (Contact)getIntent().getSerializableExtra("newContact");
+        if(c != null){
+            manager.saveContact(c);
+        }
+
 
         // specify an adapter (see also next example)
         mAdapter = new RecyclerAdapter(manager.getAllContacts());
@@ -63,14 +65,10 @@ public class MainActivity extends Activity {
 
     }
 
+    public void editContactIntent(View view){
+        Intent intent = new Intent(this, EditContactActivity.class);
 
-    public void saveContactToDatabase(){
-        Contact c = (Contact)getIntent().getSerializableExtra("newContact");
-        if(c != null){
-            manager.saveContact(c);
-            Log.d("asd",c.getName());
-        }
-
+        startActivity(intent);
     }
 
 
@@ -81,11 +79,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public void editContactIntent(View view){
-        Intent intent = new Intent(this, EditContactActivity.class);
 
-        startActivity(intent);
-    }
 }
 
 
