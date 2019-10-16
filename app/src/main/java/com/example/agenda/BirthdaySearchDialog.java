@@ -1,6 +1,7 @@
 package com.example.agenda;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ public class BirthdaySearchDialog extends DialogFragment {
 
     //Widgets
     private EditText mDialogBirthdayInput;
-
 
     private Button mDialogOk;
 
@@ -41,13 +41,19 @@ public class BirthdaySearchDialog extends DialogFragment {
 
         mDialogOk = view.findViewById(R.id.btnSearch);
 
-
+        final DBManager manager = new DBManager(getActivity());
 
         mDialogOk.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String input = mDialogBirthdayInput.getText().toString();
-                getDialog().dismiss();
+
+                MainActivity ma = (MainActivity) getActivity();
+
+                Intent intent = new Intent(getActivity(), BirthdaySearchActivity.class);
+
+                intent.putExtra("birthday", mDialogBirthdayInput.getText().toString());
+
+                startActivity(intent);
             }
         });
         return view;
@@ -60,7 +66,7 @@ public class BirthdaySearchDialog extends DialogFragment {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero
-                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                final String selectedDate = day + "/" + (month+1) + "/" + year;
                 mDialogBirthdayInput.setText(selectedDate);
             }
         });

@@ -1,13 +1,10 @@
 package com.example.agenda;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 
@@ -36,9 +33,6 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
         + ContactContract.ContactEntry.PHONE_NUMBER + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.BIRTHDAY + " TEXT NOT NULL)");
 
-        mockData(db);
-
-
     }
 
     @Override
@@ -49,49 +43,21 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
     public Cursor getAllContacts(){
         return getReadableDatabase().query(ContactContract.ContactEntry.TABLE_NAME, null, null, null, null, null, null);
     }
-
-
-
     public void deleteContact(Contact c){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL("DELETE FROM " + ContactContract.ContactEntry.TABLE_NAME+ " WHERE "+ "_ID" +"='"+c.getID()+"'");
 
     }
-
-
-
-
     public long saveContact(Contact c){
-
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-
         return sqLiteDatabase.insert(
                 ContactContract.ContactEntry.TABLE_NAME,
                 null,
                 c.toContentValues());
-
     }
 
+    public Cursor getContactsByBirthday(String date) {
+        return getReadableDatabase().rawQuery("SELECT * FROM " + ContactContract.ContactEntry.TABLE_NAME + " WHERE birthday LIKE '"+ date +"'", new String[0]);
 
-
-    private void mockData(SQLiteDatabase sqLiteDatabase){
-        //Populates the table with data
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-        mockContact(sqLiteDatabase, new Contact("Ivan","Srebernic","2995279176","26/12/1997"));
-
-        Log.d("Creation","asd");
-    }
-
-    public long mockContact(SQLiteDatabase db, Contact c){
-        return db.insert(
-                ContactContract.ContactEntry.TABLE_NAME,
-                null,
-                c.toContentValues());
     }
 }

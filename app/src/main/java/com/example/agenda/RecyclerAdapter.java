@@ -3,64 +3,46 @@ package com.example.agenda;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.recyclerview.widget.RecyclerView;
 
-
-
 import java.util.ArrayList;
+import java.util.List;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
-
-    private Cursor queryRequest;
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> implements Filterable {
 
 
 
 
-    private ArrayList<Contact> mContacts = new ArrayList<>();
-
-    private ArrayList<String> mContactImages;
-    private ArrayList<String> mContactName;
-    private ArrayList<String> mContactSurname;
-    private ArrayList<String> mContactNumber;
 
 
-    // Provide a suitable constructor (depends on the kind of dataset)   
-    public RecyclerAdapter(ArrayList<String> mContactImages, ArrayList<String> mContactNumber, ArrayList<String> mContactName) {
-        this.mContactImages = mContactImages;
-        this.mContactNumber = mContactNumber;
-        this.mContactName = mContactName;
-    }
+    private ArrayList<Contact> mContactsFull = new ArrayList<>();
+    private ArrayList<Contact> mContacts;
+
+
 
     public RecyclerAdapter(Cursor queryRequest) {
-        this.queryRequest = queryRequest;
+        //Parses the data on the db and adds it to mContactsFull
         ParseData(queryRequest);
+        mContacts = new ArrayList<>(mContactsFull);
     }
 
     public void ParseData(Cursor queryRequest){
 
-
         String[] a = queryRequest.getColumnNames();
-
-
 
         for(queryRequest.moveToFirst(); !queryRequest.isAfterLast(); queryRequest.moveToNext())
         {
-            mContacts.add(
+            mContactsFull.add(
                     new Contact(
                     queryRequest.getInt(queryRequest.getColumnIndex("_id")),
                     queryRequest.getString(queryRequest.getColumnIndex("name")),
@@ -72,15 +54,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
-    public RecyclerAdapter(ArrayList<String> mContactNumber, ArrayList<String> mContactName) {
-         this.mContactNumber = mContactNumber;
-         // Provide a reference to the views for each data item
-         this.mContactName = mContactName;
-         // Complex data items may need more than one view per item, and
+    @Override
+    public Filter getFilter() {
+        return mFilter;
+    }
 
-         // you provide access to all the views for a data item in a view holder
-     }
-     public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         Contact contact;
 
@@ -138,9 +117,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 mContext.startActivity(intent);
             }
         });
-        Log.d("Creating","Binding elements");
-        holder.contact = mContacts.get(position);
 
+
+        holder.contact = mContacts.get(position);
         holder.textViewName.setText(mContacts.get(position).getName());
         holder.textViewSurname.setText(mContacts.get(position).getSurname());
         holder.textViewNumber.setText(mContacts.get(position).getPhoneNumber());
@@ -152,6 +131,35 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return mContacts.size();
     }
 
+    private Filter mFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Contact> filteredList = new ArrayList<>();
 
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mContactsFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Contact contact : mContactsFull) {
+                    if (contact.getName().concat(" " + contact.getSurname()).toLowerCase().contains(filterPattern)) {
+                        filteredList.add(contact);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mContacts.clear();
+            mContacts.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 }
