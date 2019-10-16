@@ -1,13 +1,13 @@
 package com.example.agenda;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateContactActivity extends AppCompatActivity {
 
@@ -58,10 +58,13 @@ public class CreateContactActivity extends AppCompatActivity {
     public void addContact(View v) {
 
         Intent intent = new Intent(this, MainActivity.class);
+
         Contact c = new Contact(name.getText().toString(),surname.getText().toString(),phoneNumber.getText().toString(), birthday.getText().toString());
 
+        DBManager manager = new DBManager(this);
+        manager.saveContact(c);
 
-        intent.putExtra("newContact", c);
+        manager.close();
 
         startActivity(intent);
 

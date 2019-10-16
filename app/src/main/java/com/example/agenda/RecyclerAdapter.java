@@ -56,12 +56,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         String[] a = queryRequest.getColumnNames();
 
+
+
         for(queryRequest.moveToFirst(); !queryRequest.isAfterLast(); queryRequest.moveToNext())
         {
             mContacts.add(
                     new Contact(
-
-                            queryRequest.getString(queryRequest.getColumnIndex("name")),
+                    queryRequest.getInt(queryRequest.getColumnIndex("_id")),
+                    queryRequest.getString(queryRequest.getColumnIndex("name")),
                     queryRequest.getString(queryRequest.getColumnIndex("surname")),
                     queryRequest.getString(queryRequest.getColumnIndex("phoneNumber")),
                     queryRequest.getString(queryRequest.getColumnIndex("birthday"))));
@@ -88,7 +90,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         TextView textViewNumber;
         ImageView imageView;
         RelativeLayout parent;
-
         ImageButton editButton;
 
         public MyViewHolder(View itemView) {
@@ -98,9 +99,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             textViewSurname = itemView.findViewById(R.id.contact_surname);
             textViewNumber = itemView.findViewById(R.id.contact_number);
             parent = itemView.findViewById(R.id.parent_layout);
-
             editButton = itemView.findViewById(R.id.btnEdit);
-
         }
 
         public ImageButton getButton(){
@@ -112,6 +111,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent,
                                            int viewType) {
+
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_listitem, parent, false);
@@ -127,7 +127,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
+        final Context mContext = holder.itemView.getContext();
 
+
+        holder.getButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, EditContactActivity.class);
+                intent.putExtra("editContact", holder.contact);
+                mContext.startActivity(intent);
+            }
+        });
         Log.d("Creating","Binding elements");
         holder.contact = mContacts.get(position);
 

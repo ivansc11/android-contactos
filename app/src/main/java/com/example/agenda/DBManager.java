@@ -33,7 +33,6 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
         + ContactContract.ContactEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
         + ContactContract.ContactEntry.NAME + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.SURNAME + " TEXT NOT NULL,"
-        + ContactContract.ContactEntry.NICKNAME + " TEXT,"
         + ContactContract.ContactEntry.PHONE_NUMBER + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.BIRTHDAY + " TEXT NOT NULL)");
 
@@ -51,10 +50,16 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
         return getReadableDatabase().query(ContactContract.ContactEntry.TABLE_NAME, null, null, null, null, null, null);
     }
 
+
+
     public void deleteContact(Contact c){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        sqLiteDatabase.execSQL("DELETE FROM " + ContactContract.ContactEntry.TABLE_NAME+ " WHERE "+ "_ID" +"='"+c.getID()+"'");;
+        sqLiteDatabase.execSQL("DELETE FROM " + ContactContract.ContactEntry.TABLE_NAME+ " WHERE "+ "_ID" +"='"+c.getID()+"'");
+
     }
+
+
+
 
     public long saveContact(Contact c){
 

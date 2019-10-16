@@ -1,13 +1,18 @@
 package com.example.agenda;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class EditContactActivity extends AppCompatActivity {
+
+    Contact contact;
 
     private TextView name;
     private TextView surname;
@@ -25,13 +30,51 @@ public class EditContactActivity extends AppCompatActivity {
         surname = (EditText)findViewById(R.id.etSurname);
         phoneNumber = (EditText) findViewById(R.id.etPhonenumber);
         birthday = (EditText) findViewById(R.id.etBirthday);
+        birthday.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.etBirthday:
+                        showDatePickerDialog();
+                        break;
+                }
+            }
+        });
+
+        contact = (Contact)getIntent().getSerializableExtra("editContact");
+        name.setText(contact.getName());
+        surname.setText(contact.getSurname());
+        phoneNumber.setText(contact.getPhoneNumber());
+        birthday.setText(contact.getBirthday());
+
 
     }
 
     public void editContact(View view){
 
     }
-    public void deleteContact(View view){
 
+    public void deleteContact(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+
+        DBManager manager = new DBManager(this);
+
+        manager.deleteContact(contact);
+
+        startActivity(intent);
     }
+
+    private void showDatePickerDialog() {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                // +1 because January is zero
+                final String selectedDate = day + " / " + (month+1) + " / " + year;
+                birthday.setText(selectedDate);
+            }
+        });
+
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
 }

@@ -1,25 +1,26 @@
 package com.example.agenda;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+
+    private ImageButton mOpenBirthdaySearchButton;
+
 
 
     ArrayList<String> testArray = new ArrayList<>();
@@ -30,7 +31,6 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
 
         super.onCreate(savedInstanceState);
@@ -49,34 +49,24 @@ public class MainActivity extends Activity {
         manager = new DBManager(this);
         SQLiteDatabase db = manager.getReadableDatabase();
 
-        //Checks if contact has been sended from create contact activity and saves it to the database
-        Contact c = (Contact)getIntent().getSerializableExtra("newContact");
-        if(c != null){
-            manager.saveContact(c);
-        }
-
 
         // specify an adapter (see also next example)
         mAdapter = new RecyclerAdapter(manager.getAllContacts());
         recyclerView.setAdapter(mAdapter);
 
-
-
+    }
+    public void setBirthdayDate(){
 
     }
-
-    public void editContactIntent(View view){
-        Intent intent = new Intent(this, EditContactActivity.class);
-
-        startActivity(intent);
-    }
-
-
     public void addContactIntent(View view){
         Intent intent = new Intent(this, CreateContactActivity.class);
 
         startActivity(intent);
 
+    }
+    public void showBirthdaySearchDialog(View view){
+        BirthdaySearchDialog dialog = new BirthdaySearchDialog();
+        dialog.show(getSupportFragmentManager(), "BirthdayDialog");
     }
 
 
