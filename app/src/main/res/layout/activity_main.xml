@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/background">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -36,7 +37,10 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="30dp"
         android:clickable="true"
+        android:backgroundTint="@color/design1"
+        android:tint="@color/text"
         android:onClick="addContactIntent"
+        app:backgroundTint="@color/background"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 

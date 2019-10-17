@@ -121,6 +121,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         holder.contact = mContacts.get(position);
         holder.textViewName.setText(mContacts.get(position).getName());
+        //Modificar
+        //holder.textViewName.setText(mContacts.get(position).getName()+" "+mContacts.get(position).getSurname());
         holder.textViewSurname.setText(mContacts.get(position).getSurname());
         holder.textViewNumber.setText(mContacts.get(position).getPhoneNumber());
     }
