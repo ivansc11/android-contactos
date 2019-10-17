@@ -21,37 +21,45 @@
         app:civ_border_width="2dp"
         tools:srcCompat="@tools:sample/avatars" />
 
-
-    <TextView
-        android:id="@+id/contact_name"
+    <RelativeLayout
+        android:id="@+id/name_surname"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@id/contact_image"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
-        android:layout_toEndOf="@id/contact_image"
-        android:text="Name"
-        android:textColor="@color/text"
-        android:textSize="24sp" />
+        android:layout_toLeftOf="@id/btnEdit"
+        android:layout_marginEnd="20dp"
+        >
 
-    <TextView
-        android:id="@+id/contact_surname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="87dp"
-        android:layout_marginTop="12dp"
-        android:layout_toRightOf="@id/contact_image"
-        android:text="Surname"
-        android:textColor="@color/text"
-        android:textSize="24sp" />
+            <TextView
+                android:id="@+id/contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/text"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/contact_surname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/contact_name"
+                android:layout_marginStart="12dp"
+                android:text="Surname"
+                android:textColor="@color/text"
+                android:textSize="24sp" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/contact_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/contact_name"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="12dp"
         android:layout_toRightOf="@id/contact_image"
+        android:layout_toLeftOf="@id/btnEdit"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/name_surname"
         android:text="(999)123456789"
         android:textColor="@color/text"
         android:textSize="17sp" />
@@ -59,7 +67,7 @@
     <ImageButton
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3.5dp"

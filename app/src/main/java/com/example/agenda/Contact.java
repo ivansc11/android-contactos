@@ -10,7 +10,6 @@ public class Contact implements Serializable {
     private int id;
     private String name;
     private String surname;
-    private String nickname;
     private String phoneNumber;
     private String avatarUrl;
     private String birthday;
@@ -42,9 +41,6 @@ public class Contact implements Serializable {
         return surname;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -68,9 +64,6 @@ public class Contact implements Serializable {
         this.surname = surname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -91,7 +84,7 @@ public class Contact implements Serializable {
         ContentValues values = new ContentValues();
         values.put(ContactContract.ContactEntry.NAME, name);
         values.put(ContactContract.ContactEntry.SURNAME, surname);
-        values.put(ContactContract.ContactEntry.NICKNAME, nickname);
+        //values.put(ContactContract.ContactEntry.NICKNAME, nickname);
         values.put(ContactContract.ContactEntry.PHONE_NUMBER, phoneNumber);
         values.put(ContactContract.ContactEntry.BIRTHDAY, birthday);
 
