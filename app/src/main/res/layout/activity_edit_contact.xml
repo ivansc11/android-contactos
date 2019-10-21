@@ -24,6 +24,7 @@
         android:layout_height="19dp"
         android:layout_marginStart="32dp"
         android:text="Name"
+        android:textStyle="bold"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/etName"
         app:layout_constraintStart_toEndOf="@+id/imageView" />
@@ -45,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="Surname"
+        android:textStyle="bold"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/etSurname"
         app:layout_constraintStart_toEndOf="@+id/imageView" />
@@ -67,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:text="Phone number"
+        android:textStyle="bold"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/etPhonenumber"
         app:layout_constraintStart_toStartOf="parent" />
@@ -88,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
         android:text="Birthday"
+        android:textStyle="bold"
         android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/etBirthday"
         app:layout_constraintStart_toStartOf="parent" />

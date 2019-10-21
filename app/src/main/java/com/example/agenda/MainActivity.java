@@ -18,24 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
-
     private ImageButton mOpenBirthdaySearchButton;
-
-
     DBManager manager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

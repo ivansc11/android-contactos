@@ -31,7 +31,7 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
         + ContactContract.ContactEntry.NAME + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.SURNAME + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.PHONE_NUMBER + " TEXT NOT NULL,"
-        + ContactContract.ContactEntry.BIRTHDAY + " TEXT NOT NULL)");
+        + ContactContract.ContactEntry.BIRTHDAY + " TEXT NOT NULL, CHECK (date('now')>birthday AND name NOT LIKE '' AND surname NOT LIKE '' AND phoneNumber NOT LIKE ''))");
 
     }
 
@@ -58,6 +58,11 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
 
     public Cursor getContactsByBirthday(String date) {
         return getReadableDatabase().rawQuery("SELECT * FROM " + ContactContract.ContactEntry.TABLE_NAME + " WHERE birthday LIKE '"+ date +"'", new String[0]);
+
+    }
+
+    public Cursor getContactsTodayBirthday() {
+        return getReadableDatabase().rawQuery("SELECT * FROM " + ContactContract.ContactEntry.TABLE_NAME + " WHERE strftime(birthday,'%Y-%m') LIKE strftime('now','%Y-%m')", new String[0]);
 
     }
 }

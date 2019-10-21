@@ -58,10 +58,10 @@ public class EditContactActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
 
         DBManager manager = new DBManager(this);
-
         manager.deleteContact(contact);
 
         startActivity(intent);
+
     }
 
     private void showDatePickerDialog() {

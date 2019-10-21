@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,13 +57,19 @@ public class CreateContactActivity extends AppCompatActivity {
 
     //Agregar contacto a la base de datos
     public void addContact(View v) {
+        String nameSurname=name.getText().toString()+" "+surname.getText().toString();
 
         Intent intent = new Intent(this, MainActivity.class);
 
         Contact c = new Contact(name.getText().toString(),surname.getText().toString(),phoneNumber.getText().toString(), birthday.getText().toString());
 
         DBManager manager = new DBManager(this);
-        manager.saveContact(c);
+
+        if(manager.saveContact(c)!=-1){
+            Toast.makeText(this, "Succeed saving "+nameSurname,Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Error saving contact",Toast.LENGTH_SHORT).show();
+        }
 
         manager.close();
 
