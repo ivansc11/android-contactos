@@ -46,14 +46,30 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
     public void deleteContact(Contact c){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL("DELETE FROM " + ContactContract.ContactEntry.TABLE_NAME+ " WHERE "+ "_ID" +"='"+c.getID()+"'");
-
+        sqLiteDatabase.close();
     }
+
     public long saveContact(Contact c){
+        long row;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        return sqLiteDatabase.insert(
+        row= sqLiteDatabase.insert(
                 ContactContract.ContactEntry.TABLE_NAME,
                 null,
                 c.toContentValues());
+        sqLiteDatabase.close();
+        return row;
+    }
+
+    public long updateContact(Contact c){
+        long row=-1;
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        try{
+            row= sqLiteDatabase.update(ContactContract.ContactEntry.TABLE_NAME,c.toContentValues(),"_id="+c.getID(),null);
+            }catch (Exception e){
+                //For possible fail because constraints
+                }
+        sqLiteDatabase.close();
+        return row;
     }
 
     public Cursor getContactsByBirthday(String date) {

@@ -71,8 +71,6 @@ public class CreateContactActivity extends AppCompatActivity {
             Toast.makeText(this, "Error saving contact",Toast.LENGTH_SHORT).show();
         }
 
-        manager.close();
-
         startActivity(intent);
 
     }

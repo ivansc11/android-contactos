@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,6 @@ public class EditContactActivity extends AppCompatActivity {
     private TextView surname;
     private TextView phoneNumber;
     private TextView birthday;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,23 @@ public class EditContactActivity extends AppCompatActivity {
     }
 
     public void editContact(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        DBManager manager = new DBManager(this);
+
+        contact.setName(name.getText().toString());
+        contact.setSurname(surname.getText().toString());
+        contact.setBirthday(birthday.getText().toString());
+        contact.setPhoneNumber(phoneNumber.getText().toString());
+
+
+        if( manager.updateContact(contact)!=-1){
+            Toast.makeText(this, "Succeed editing contact",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Error editing contact",Toast.LENGTH_SHORT).show();
+        }
+
+        startActivity(intent);
+
 
     }
 
@@ -73,7 +90,6 @@ public class EditContactActivity extends AppCompatActivity {
                 birthday.setText(selectedDate);
             }
         });
-
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
