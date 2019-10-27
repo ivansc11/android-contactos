@@ -26,15 +26,15 @@ public class EditContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_contact);
 
 
-        name = (EditText)findViewById(R.id.etName);
-        surname = (EditText)findViewById(R.id.etSurname);
-        phoneNumber = (EditText) findViewById(R.id.etPhonenumber);
-        birthday = (EditText) findViewById(R.id.etBirthday);
+        name = (EditText)findViewById(R.id.et_name);
+        surname = (EditText)findViewById(R.id.et_surname);
+        phoneNumber = (EditText) findViewById(R.id.et_phone);
+        birthday = (EditText) findViewById(R.id.et_birthday);
         birthday.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.etBirthday:
+                    case R.id.et_birthday:
                         showDatePickerDialog();
                         break;
                 }
@@ -58,6 +58,8 @@ public class EditContactActivity extends AppCompatActivity {
         contact.setSurname(surname.getText().toString());
         contact.setBirthday(birthday.getText().toString());
         contact.setPhoneNumber(phoneNumber.getText().toString());
+
+
 
 
         if( manager.updateContact(contact)!=-1){
