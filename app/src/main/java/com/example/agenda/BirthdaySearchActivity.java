@@ -29,7 +29,7 @@ public class BirthdaySearchActivity extends AppCompatActivity {
         DBManager manager = new DBManager(this);
 
 
-        setUpRecyclerView(manager.getContactsByBirthday(birthday));
+        setUpRecyclerView(manager.getContactsByTodayBirthday());
 
     }
 

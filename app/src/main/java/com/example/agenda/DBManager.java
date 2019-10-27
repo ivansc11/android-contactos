@@ -52,10 +52,7 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
     public long saveContact(Contact c){
         long row;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        row= sqLiteDatabase.insert(
-                ContactContract.ContactEntry.TABLE_NAME,
-                null,
-                c.toContentValues());
+        row= sqLiteDatabase.insert(ContactContract.ContactEntry.TABLE_NAME, null, c.toContentValues());
         sqLiteDatabase.close();
         return row;
     }
@@ -77,7 +74,7 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
 
     }
 
-    public Cursor getContactsTodayBirthday() {
+    public Cursor getContactsByTodayBirthday() {
         return getReadableDatabase().rawQuery("SELECT * FROM " + ContactContract.ContactEntry.TABLE_NAME + " WHERE strftime(birthday,'%Y-%m') LIKE strftime('now','%Y-%m')", new String[0]);
 
     }
