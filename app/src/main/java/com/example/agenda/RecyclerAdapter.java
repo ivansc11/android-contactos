@@ -1,3 +1,4 @@
+
 package com.example.agenda;
 
 import android.Manifest;
@@ -116,8 +117,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 Intent intent = new Intent(mContext, EditContactActivity.class);
                 intent.putExtra("editContact", holder.contact);
                 mContext.startActivity(intent);
-    }
-});
+            }
+        });
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
