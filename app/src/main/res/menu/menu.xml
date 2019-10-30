@@ -7,13 +7,13 @@
     <item
         android:id="@+id/svContactSearch"
         android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search"
+        android:title="@string/btn_search_contact"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"
         />
     <item
         android:id="@+id/btnBirthdaySearch"
         android:icon="@mipmap/cake"
-        android:title="Item"
+        android:title="@string/menu_item"
         app:showAsAction="always" />
 </menu>

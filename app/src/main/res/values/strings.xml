@@ -1,7 +1,45 @@
 <resources>
-    <string name="app_name">Agenda</string>
-    <string name="title_activity_contact_detail">activity_contact_detail</string>
-    <string name="large_text">
+    <string name="app_name">Briefing Hub</string>
+    <string name="title_activity_contact_detail" translatable="false">activity_contact_detail</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_menu" translatable="false">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_item">Item</string>
+
+    <string name="btn_birthday">Input Birthday</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_search_contact">Search contact</string>
+    <string name="btn_delete">Delete</string>
+
+    <string name="contact_name">Name</string>
+    <string name="contact_birthday">Birthday</string>
+    <string name="contact_surname">Surname</string>
+    <string name="contact_phone">Phone number</string>
+
+    <string name="placeholder_phone" translatable="false">(999)123456789</string>
+
+
+    <string name="app_title" translatable="false">RAID AREA 51</string>
+    <string name="app_description">Briefing Hub</string>
+    <string name="app_footer" translatable="false">Amarante - Mierez - Srebernic Productions</string>
+
+
+    <string name="large_text" translatable="false">
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -90,22 +128,4 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_menu">MenuActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
-    <string name="search_contact">Buscar contacto</string>
 </resources>
