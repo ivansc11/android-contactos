@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -31,7 +32,7 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
         + ContactContract.ContactEntry.NAME + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.SURNAME + " TEXT NOT NULL,"
         + ContactContract.ContactEntry.PHONE_NUMBER + " TEXT NOT NULL,"
-        + ContactContract.ContactEntry.BIRTHDAY + " TEXT NOT NULL, CHECK (date('now')>birthday AND name NOT LIKE '' AND surname NOT LIKE '' AND phoneNumber NOT LIKE ''))");
+        + ContactContract.ContactEntry.BIRTHDAY + " TEXT NOT NULL, CHECK (date('now','localtime')>date(birthday) AND name NOT LIKE '' AND surname NOT LIKE '' AND phoneNumber NOT LIKE ''))");
 
     }
 
@@ -53,6 +54,7 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
         long row;
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         row= sqLiteDatabase.insert(ContactContract.ContactEntry.TABLE_NAME, null, c.toContentValues());
+
         sqLiteDatabase.close();
         return row;
     }

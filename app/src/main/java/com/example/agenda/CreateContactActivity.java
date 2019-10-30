@@ -16,12 +16,13 @@ public class CreateContactActivity extends AppCompatActivity {
     EditText surname;
     EditText phoneNumber;
     EditText birthday;
+    String birthdayToSave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_contact);
 
-        
+        birthdayToSave=null;
         name = (EditText)findViewById(R.id.et_name);
         surname = (EditText)findViewById(R.id.et_surname);
         phoneNumber = (EditText) findViewById(R.id.et_phone);
@@ -46,8 +47,9 @@ public class CreateContactActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero
-                String selectedDate = day + "/" + (month+1) + "/" + year;
+                final String selectedDate = ToolsDate.pickerToString(day,month,year);
                 birthday.setText(selectedDate);
+                birthdayToSave=ToolsDate.getBirthdaySave(year,month,day);
             }
         });
 
@@ -61,7 +63,7 @@ public class CreateContactActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
 
-        Contact c = new Contact(name.getText().toString(),surname.getText().toString(),phoneNumber.getText().toString(), birthday.getText().toString());
+        Contact c = new Contact(name.getText().toString(),surname.getText().toString(),phoneNumber.getText().toString(), birthdayToSave);
 
         DBManager manager = new DBManager(this);
 

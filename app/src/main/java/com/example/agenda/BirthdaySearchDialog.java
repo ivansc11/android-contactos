@@ -73,4 +73,5 @@ public class BirthdaySearchDialog extends DialogFragment {
 
         newFragment.show(getFragmentManager(), "datePicker");
     }
+
 }

@@ -19,6 +19,7 @@ public class EditContactActivity extends AppCompatActivity {
     private TextView surname;
     private TextView phoneNumber;
     private TextView birthday;
+    private String birthdayToSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +41,12 @@ public class EditContactActivity extends AppCompatActivity {
                 }
             }
         });
-
         contact = (Contact)getIntent().getSerializableExtra("editContact");
         name.setText(contact.getName());
         surname.setText(contact.getSurname());
         phoneNumber.setText(contact.getPhoneNumber());
-        birthday.setText(contact.getBirthday());
-
+        birthday.setText(ToolsDate.stringToDate(contact.getBirthday()));
+        birthdayToSave=contact.getBirthday();
 
     }
 
@@ -56,11 +56,9 @@ public class EditContactActivity extends AppCompatActivity {
 
         contact.setName(name.getText().toString());
         contact.setSurname(surname.getText().toString());
-        contact.setBirthday(birthday.getText().toString());
+        contact.setBirthday(birthdayToSave);
         contact.setPhoneNumber(phoneNumber.getText().toString());
-
-
-
+        //Toast.makeText(this, birthday.getText().toString(),Toast.LENGTH_SHORT).show();
 
         if( manager.updateContact(contact)!=-1){
             Toast.makeText(this, "Succeed editing contact",Toast.LENGTH_SHORT).show();
@@ -88,8 +86,9 @@ public class EditContactActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 // +1 because January is zero
-                final String selectedDate = day + "/" + (month+1) + "/" + year;
+                final String selectedDate = ToolsDate.pickerToString(day,month,year);
                 birthday.setText(selectedDate);
+                birthdayToSave=ToolsDate.getBirthdaySave(year,month,day);
             }
         });
         newFragment.show(getSupportFragmentManager(), "datePicker");
