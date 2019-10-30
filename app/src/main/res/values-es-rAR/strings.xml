@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Agenda</string>
+    <string name="navigation_drawer_open">Abrir menú de navegación</string>
+    <string name="navigation_drawer_close">Cerrar menú de navegación</string>
+    <string name="nav_header_desc">Cabecera de navegación</string>
+    <string name="menu_tools">Herramientas</string>
+    <string name="menu_slideshow">Presentación</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_send">Enviar</string>
+    <string name="menu_home">Página Principal</string>
+    <string name="menu_gallery">Galería</string>
+    <string name="contact_surname">Apellido</string>
+    <string name="contact_phone">Número de teléfono</string>
+    <string name="contact_name">Nombre</string>
+    <string name="contact_birthday">Cumpleaños</string>
+    <string name="btn_search_contact">Buscar contacto</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="btn_birthday">Ingresar Cumpleaños</string>
+    <string name="app_description">Central de Planificación</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="menu_item">Item</string>
+</resources>
