@@ -1,8 +1,11 @@
 package com.example.agenda;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,13 +14,16 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private RecyclerView recyclerView;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -25,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     DBManager manager;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
         setUpRecyclerView(manager.getAllContacts());
 
+        if (this.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+
+            return;
+        }
         Cursor results = manager.getContactsByBirthday("16/10/2019");
 
 
@@ -108,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         BirthdaySearchDialog dialog = new BirthdaySearchDialog();
         dialog.show(getSupportFragmentManager(), "BirthdayDialog");
     }
+
 
 
 }
