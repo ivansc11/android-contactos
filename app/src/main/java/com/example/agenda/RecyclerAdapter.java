@@ -1,8 +1,12 @@
 package com.example.agenda;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -21,13 +28,8 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> implements Filterable {
 
 
-
-
-
-
     private ArrayList<Contact> mContactsFull = new ArrayList<>();
     private ArrayList<Contact> mContacts;
-
 
 
     public RecyclerAdapter(Cursor queryRequest) {
@@ -36,19 +38,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         mContacts = new ArrayList<>(mContactsFull);
     }
 
-    public void ParseData(Cursor queryRequest){
+    public void ParseData(Cursor queryRequest) {
 
         String[] a = queryRequest.getColumnNames();
 
-        for(queryRequest.moveToFirst(); !queryRequest.isAfterLast(); queryRequest.moveToNext())
-        {
+        for (queryRequest.moveToFirst(); !queryRequest.isAfterLast(); queryRequest.moveToNext()) {
             mContactsFull.add(
                     new Contact(
-                    queryRequest.getInt(queryRequest.getColumnIndex("_id")),
-                    queryRequest.getString(queryRequest.getColumnIndex("name")),
-                    queryRequest.getString(queryRequest.getColumnIndex("surname")),
-                    queryRequest.getString(queryRequest.getColumnIndex("phoneNumber")),
-                    queryRequest.getString(queryRequest.getColumnIndex("birthday"))));
+                            queryRequest.getInt(queryRequest.getColumnIndex("_id")),
+                            queryRequest.getString(queryRequest.getColumnIndex("name")),
+                            queryRequest.getString(queryRequest.getColumnIndex("surname")),
+                            queryRequest.getString(queryRequest.getColumnIndex("phoneNumber")),
+                            queryRequest.getString(queryRequest.getColumnIndex("birthday"))));
 
         }
 
@@ -81,7 +82,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             editButton = itemView.findViewById(R.id.btnEdit);
         }
 
-        public ImageButton getButton(){
+        public ImageButton getButton() {
             return editButton;
         }
     }
@@ -115,9 +116,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 Intent intent = new Intent(mContext, EditContactActivity.class);
                 intent.putExtra("editContact", holder.contact);
                 mContext.startActivity(intent);
+    }
+});
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(ComplexRecyclerViewAdapter.this, "Item no: "+ position, Toast.LENGTH_LONG).show;
+                Toast.makeText(v.getContext(), "General click !" + holder.textViewName.getText().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + holder.textViewNumber.getText().toString()));
+
+                mContext.startActivity(intent);
             }
         });
-
 
         holder.contact = mContacts.get(position);
         holder.textViewName.setText(mContacts.get(position).getName());
