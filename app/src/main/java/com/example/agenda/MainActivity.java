@@ -112,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.btnBirthdaySearch:
-                showBirthdaySearchDialog();
+                Intent intent = new Intent(this, BirthdaySearchActivity.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -125,10 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
 
-    }
-    public void showBirthdaySearchDialog(){
-        BirthdaySearchDialog dialog = new BirthdaySearchDialog();
-        dialog.show(getSupportFragmentManager(), "BirthdayDialog");
     }
 
 
