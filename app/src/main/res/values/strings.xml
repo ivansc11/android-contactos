@@ -31,6 +31,8 @@
     <string name="contact_surname">Surname</string>
     <string name="contact_phone">Phone number</string>
 
+    <string name="today_birthday">Today\'s birthday</string>
+
     <string name="placeholder_phone" translatable="false">(999)123456789</string>
 
 
