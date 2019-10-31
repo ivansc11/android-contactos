@@ -77,7 +77,7 @@ public class DBManager extends SQLiteOpenHelper implements Serializable {
     }
 
     public Cursor getContactsByTodayBirthday() {
-        return getReadableDatabase().rawQuery("SELECT * FROM " + ContactContract.ContactEntry.TABLE_NAME + " WHERE substr(birthday, 6) LIKE substr(date('now'),6)", new String[0]);
+        return getReadableDatabase().rawQuery("SELECT * FROM " + ContactContract.ContactEntry.TABLE_NAME + " WHERE substr(birthday, 6) LIKE substr(date('now','localtime'),6)", new String[0]);
 
     }
 }
